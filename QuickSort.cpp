@@ -48,10 +48,10 @@ void printArray(int arr[], int size)
 int main()
 {
 	//Cambiar aca el tipo de arreglo
-    std::ifstream inputFile("inverted_arrays.txt");
+    std::ifstream inputFile("ordered_arrays.txt");
     std::string line;
     //Cambiar aca el tamaño del arreglo [10 - 10^5]
-    int targetSize = 10;
+    int targetSize = 10000;
     int N;
     int* arr = nullptr;
 
@@ -94,7 +94,7 @@ int main()
         // Inicia el temporizador
         auto start = std::chrono::high_resolution_clock::now();
 
-        quickSort(arr, 0 , N-1);
+        quickSort(arrCopy, 0 , N-1);
 
         // Detiene el temporizador
         auto end = std::chrono::high_resolution_clock::now();

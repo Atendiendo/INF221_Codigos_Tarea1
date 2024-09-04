@@ -57,7 +57,7 @@ int main() {
         // Inicia el temporizador
         auto start = std::chrono::high_resolution_clock::now();
 
-        sort(arr, arr + N);
+        sort(arrCopy, arrCopy + N);
 
         // Detiene el temporizador
         auto end = std::chrono::high_resolution_clock::now();
