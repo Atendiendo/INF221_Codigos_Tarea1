@@ -3,9 +3,21 @@
 #include <chrono>
 using namespace std;
 
-// An optimized version of Bubble Sort
-void bubbleSort(int arr[], int n)
-{
+/*****
+* void bubbleSort
+******
+* Se recorre toda la lista, comparando entre 2 elemento contiguos
+* si uno es mayor que otro, haciendo que el mayor se mueva a la
+* derecha de la lista y el menor a la izquierda.
+******
+* Input:
+*   int arr[]: El arreglo a ordenar.
+*   int n: Tamaño del arreglo.
+******
+* Returns:
+*   No se retorna nada ya que la función es de tipo void.
+*****/
+void bubbleSort(int arr[], int n) {
     int i, j;
     bool swapped;
     for (i = 0; i < n - 1; i++) {
@@ -16,30 +28,48 @@ void bubbleSort(int arr[], int n)
                 swapped = true;
             }
         }
-
-        // If no two elements were swapped
-        // by inner loop, then break
         if (swapped == false)
             break;
     }
 }
 
-// Function to print an array
-void printArray(int arr[], int size)
-{
+/*****
+* void printArray
+******
+* Imprime un arreglo por consola.
+******
+* Input:
+*   int arr[]: El arreglo a imprimir.
+*   int n: Tamaño del arreglo.
+******
+* Returns:
+*   No se retorna nada ya que la función es de tipo void.
+*****/
+void printArray(int arr[], int n) {
     int i;
-    for (i = 0; i < size; i++)
+    for (i = 0; i < n; i++)
         cout << " " << arr[i];
 }
 
-// Driver program to test above functions
-int main()
-{
+/*****
+* int main
+******
+* Se encarga de leer los archivos de prueba.
+* Se encarga de llamar a la funcion bubbleSort.
+* Se encarga de medir el tiempo de cada prueba y sacar el promedio.
+******
+* Input:
+*   No recibe inputs.
+******
+* Returns:
+*   int: Retorna 0 si no hay problemas en la ejecucion.
+*****/
+int main() {
     //Cambiar aca el tipo de arreglo
     std::ifstream inputFile("random_arrays.txt");
     std::string line;
     //Cambiar aca el tamaño del arreglo [10 - 10^5]
-    int targetSize = 100000;
+    int targetSize = 10;
     int N;
     int* arr = nullptr;
 
@@ -54,7 +84,6 @@ int main()
 
         // Verifica si la línea contiene el tamaño del arreglo
         if (ss >> N && N == targetSize) {
-            // Reservar memoria para el arreglo
             arr = new int[N];
 
             // Lee la siguiente línea que contiene los números
@@ -95,17 +124,17 @@ int main()
 
         // Imprimir el tiempo transcurrido en microsegundos para esta prueba
         std::cout << "Prueba " << (test + 1) << " - Tiempo transcurrido: " << elapsed_time.count() << " µs" << std::endl;
-        /*
-        cout << "Sorted array: \n";
+        
+        cout << "Arreglo ordenado: \n";
         printArray(arr, N);
         cout << "\n";
-        */
+        
         // Liberar la memoria
         delete[] arrCopy;
     }
 
-    // Calcular el promedio del tiempo
     cout << "\n";
+    // Calcular el promedio del tiempo
     double average_time = total_time / 10.0;
     std::cout << "Tiempo promedio: " << average_time << " µs" << std::endl;
 
@@ -114,7 +143,6 @@ int main()
     
     return 0;
 }
-// This code is contributed by shivanisinghss2110
 
 //Sacado de:
 //https://www.geeksforgeeks.org/bubble-sort-algorithm/

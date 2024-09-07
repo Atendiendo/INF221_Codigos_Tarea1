@@ -1,14 +1,37 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Function to print an array
-void printArray(int arr[], int size)
-{
+/*****
+* void printArray
+******
+* Imprime un arreglo por consola
+******
+* Input:
+*   int arr[]: El arreglo a imprimir
+*   int n: Tamaño del arreglo.
+******
+* Returns:
+*   No se retorna nada ya que la función es de tipo void.
+*****/
+void printArray(int arr[], int n) {
     int i;
-    for (i = 0; i < size; i++)
+    for (i = 0; i < n; i++)
         cout << " " << arr[i];
 }
 
+/*****
+* int main
+******
+* Se encarga de leer los archivos de prueba
+* Se encarga de llamar a la funcion Sort de la STL
+* Se encarga de medir el tiempo de cada prueba y sacar el promedio
+******
+* Input:
+*   No recibe inputs
+******
+* Returns:
+*   int: Retorna 0 si no hay problemas en la ejecucion.
+*****/
 int main() {
     //Cambiar aca el tipo de arreglo
     std::ifstream inputFile("inverted_arrays.txt");
@@ -70,11 +93,10 @@ int main() {
 
         // Imprimir el tiempo transcurrido en microsegundos para esta prueba
         std::cout << "Prueba " << (test + 1) << " - Tiempo transcurrido: " << elapsed_time.count() << " µs" << std::endl;
-        /*
-        cout << "Sorted array: \n";
-        printArray(arr, N);
+        
+        cout << "Arreglo ordenado: \n";
+        printArray(arrCopy, N);
         cout << "\n";
-        */
 
         // Liberar la memoria
         delete[] arrCopy;
