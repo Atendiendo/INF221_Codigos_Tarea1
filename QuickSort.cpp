@@ -2,7 +2,7 @@
 using namespace std;
 
 /*****
-* void partition
+* int partition
 ******
 * Recorre todo el subarreglo entregado desde arr[low...high],
 * para ir moviendo el elemento del pivote a su index ordenado
@@ -102,8 +102,7 @@ void printArray(int arr[], int n) {
 * Returns:
 *   int: Retorna 0 si no hay problemas en la ejecucion.
 *****/
-int main()
-{
+int main() {
 	//Cambiar aca el tipo de arreglo
     std::ifstream inputFile("ordered_arrays.txt");
     std::string line;
