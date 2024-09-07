@@ -34,21 +34,21 @@ void printArray(int arr[], int n) {
 *****/
 int main() {
     //Cambiar aca el tipo de arreglo
-    std::ifstream inputFile("inverted_arrays.txt");
-    std::string line;
+    ifstream inputFile("inverted_arrays.txt");
+    string line;
     //Cambiar aca el tamaño del arreglo [10 - 10^5]
     int targetSize = 10;
     int N;
     int* arr = nullptr;
 
     if (!inputFile) {
-        std::cerr << "No se pudo abrir el archivo." << std::endl;
+        cerr << "No se pudo abrir el archivo." << endl;
         return 1;
     }
 
     // Leer el archivo línea por línea
-    while (std::getline(inputFile, line)) {
-        std::stringstream ss(line);
+    while (getline(inputFile, line)) {
+        stringstream ss(line);
 
         // Verifica si la línea contiene el tamaño del arreglo
         if (ss >> N && N == targetSize) {
@@ -56,8 +56,8 @@ int main() {
             arr = new int[N];
 
             // Lee la siguiente línea que contiene los números
-            if (std::getline(inputFile, line)) {
-                std::stringstream ssNumbers(line);
+            if (getline(inputFile, line)) {
+                stringstream ssNumbers(line);
                 int i = 0;
                 int number;
                 while (ssNumbers >> number && i < N) {
@@ -75,24 +75,24 @@ int main() {
     for (int test = 0; test < 10; ++test) {
         // Crear una copia del arreglo original para cada prueba
         int* arrCopy = new int[N];
-        std::copy(arr, arr + N, arrCopy);
+        copy(arr, arr + N, arrCopy);
 
         // Inicia el temporizador
-        auto start = std::chrono::high_resolution_clock::now();
+        auto start = chrono::high_resolution_clock::now();
 
         sort(arrCopy, arrCopy + N);
 
         // Detiene el temporizador
-        auto end = std::chrono::high_resolution_clock::now();
+        auto end = chrono::high_resolution_clock::now();
 
         // Calcular el tiempo transcurrido en microsegundos
-        std::chrono::duration<double, std::micro> elapsed_time = end - start;
+        chrono::duration<double, micro> elapsed_time = end - start;
 
         // Sumar el tiempo de esta prueba
         total_time += elapsed_time.count();
 
         // Imprimir el tiempo transcurrido en microsegundos para esta prueba
-        std::cout << "Prueba " << (test + 1) << " - Tiempo transcurrido: " << elapsed_time.count() << " µs" << std::endl;
+        cout << "Prueba " << (test + 1) << " - Tiempo transcurrido: " << elapsed_time.count() << " µs" << endl;
         
         cout << "Arreglo ordenado: \n";
         printArray(arrCopy, N);
@@ -105,7 +105,7 @@ int main() {
     // Calcular el promedio del tiempo
     cout << "\n";
     double average_time = total_time / 10.0;
-    std::cout << "Tiempo promedio: " << average_time << " µs" << std::endl;
+    cout << "Tiempo promedio: " << average_time << " µs" << endl;
 
     // Liberar la memoria del arreglo original
     delete[] arr;
