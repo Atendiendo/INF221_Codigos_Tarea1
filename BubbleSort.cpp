@@ -102,7 +102,7 @@ int main() {
 
     double total_time = 0.0;
 
-    for (int test = 0; test < 2; ++test) {
+    for (int test = 0; test < 10; ++test) {
         // Crear una copia del arreglo original para cada prueba
         int* arrCopy = new int[N];
         copy(arr, arr + N, arrCopy);
@@ -134,7 +134,7 @@ int main() {
 
     cout << "\n";
     // Calcular el promedio del tiempo
-    double average_time = total_time / 2.0;
+    double average_time = total_time / 10.0;
     cout << "Tiempo promedio: " << average_time << " µs" << endl;
 
     // Liberar la memoria del arreglo original
