@@ -106,7 +106,7 @@ int main() {
 	//Cambiar aca el tipo de arreglo
     ifstream inputFile("DatasetArreglos/ordered_arrays.txt");
     string line;
-    //Cambiar aca el tamaño del arreglo [10 - 10^5]
+    //Cambiar aca el tamaño del arreglo
     int targetSize = 10;
     int N;
     int* arr = nullptr;
