@@ -5,7 +5,7 @@ import numpy as np
 os.makedirs('DatasetMatrices', exist_ok=True)
 
 # Tamaños de las matrices
-sizes = [2, 5, 10, 15, 30, 50, 100, 250]
+sizes = [2, 5, 10, 15, 30, 50, 100, 250, 500, 1000]
 
 # Generar y guardar matrices
 for size in sizes:
