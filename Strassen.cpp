@@ -2,7 +2,7 @@
 #include <chrono>
 using namespace std;
 
-const int SIZE = 100; //Cambiar tamaño de las matrices
+const int SIZE = 5; //Cambiar tamaño de las matrices
 
 /*****
 * void addMatrix
@@ -306,8 +306,6 @@ int main() {
 
     // Leer la primera matriz
     readMatrix(file, mat1);
-    cout << "Matriz 1 \n";
-    //printMatrix(mat1);
 
     // Leer el separador '-'
     string separator;
@@ -315,8 +313,6 @@ int main() {
 
     // Leer la segunda matriz
     readMatrix(file, mat2);
-    cout << "Matriz 2 \n";
-    //printMatrix(mat2);
 
     // Inicia el temporizador
     auto start = chrono::high_resolution_clock::now();

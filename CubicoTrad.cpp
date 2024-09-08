@@ -2,7 +2,7 @@
 #include <chrono>
 using namespace std;
 
-const int SIZE = 5; //Cambiar tamaño de las matrices
+const int SIZE = 2; //Cambiar tamaño de las matrices
 
 /*****
 * int** mulMat
