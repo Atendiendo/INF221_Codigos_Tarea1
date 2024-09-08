@@ -340,6 +340,13 @@ int main() {
         chrono::duration<double, micro> elapsed_time = end - start;
         total_time += elapsed_time.count();
 
+        // Imprimir el resultado y el tiempo transcurrido
+        cout << "Prueba " << (test + 1) << " - Tiempo transcurrido: " << elapsed_time.count() << " µs" << endl;
+
+        cout << "Resultado:\n";
+        printMatrix(rslt);
+        cout << "\n";
+
         // Liberar memoria de matrices con padding
         for (int i = 0; i < newSize; i++) {
             delete[] paddedMat1[i];
@@ -351,9 +358,6 @@ int main() {
 
     // Calcular el tiempo promedio
     double average_time = total_time / 10;
-
-    cout << "Resultado: \n";
-    printMatrix(rslt);
 
     // Imprimir el tiempo promedio transcurrido en microsegundos
     cout << "Tiempo promedio: " << average_time << " µs" << endl;
