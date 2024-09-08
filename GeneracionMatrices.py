@@ -1,7 +1,11 @@
+import os
 import numpy as np
 
+# Crear la carpeta 'DatasetMatrices' si no existe
+os.makedirs('DatasetMatrices', exist_ok=True)
+
 # Tamaños de las matrices
-sizes = [5, 10, 100, 250, 500, 1000]
+sizes = [2, 5, 10, 15, 30, 50, 100, 250]
 
 # Generar y guardar matrices
 for size in sizes:
@@ -9,8 +13,8 @@ for size in sizes:
     matrix1 = np.random.randint(0, 100, size=(size, size))
     matrix2 = np.random.randint(0, 100, size=(size, size))
     
-    # Guardar en un archivo
-    filename = f'matrices_{size}.txt'
+    # Guardar en un archivo dentro de 'DatasetMatrices'
+    filename = os.path.join('DatasetMatrices', f'matrices_{size}.txt')
     with open(filename, 'w') as f:
         # Guardar primera matriz
         np.savetxt(f, matrix1, fmt='%d')

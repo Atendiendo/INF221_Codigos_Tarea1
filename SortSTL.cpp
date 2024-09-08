@@ -34,7 +34,7 @@ void printArray(int arr[], int n) {
 *****/
 int main() {
     //Cambiar aca el tipo de arreglo
-    ifstream inputFile("inverted_arrays.txt");
+    ifstream inputFile("DatasetArreglos/inverted_arrays.txt");
     string line;
     //Cambiar aca el tamaño del arreglo [10 - 10^5]
     int targetSize = 10;
