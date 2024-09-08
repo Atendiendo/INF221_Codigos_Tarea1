@@ -149,28 +149,43 @@ int main() {
     // Leer la segunda matriz
     readMatrix(file, mat2);
 
-    // Inicia el temporizador
-    auto start = chrono::high_resolution_clock::now();
+    file.close();
 
-    // Transponer la segunda matriz
-    transposeMatrix(mat2, mat2T);
+    double total_time = 0.0;
 
-    // Función para multiplicar matrices
-    int** result = mulMat(mat1, mat2T);
+    for (int test = 0; test < 10; ++test) {
+        // Inicia el temporizador
+        auto start = chrono::high_resolution_clock::now();
 
-    // Detiene el temporizador
-    auto end = chrono::high_resolution_clock::now();
+        // Transponer la segunda matriz
+        transposeMatrix(mat2, mat2T);
 
-    // Calcular el tiempo transcurrido en microsegundos
-    chrono::duration<double, micro> elapsed_time = end - start;
+        // Función para multiplicar matrices
+        int** result = mulMat(mat1, mat2T);
 
-    // Resultado
-    cout << "Resultado: \n";
-    printMatrix(result);
-    freeMatrix(result);
+        // Detiene el temporizador
+        auto end = chrono::high_resolution_clock::now();
 
-    // Imprimir el tiempo transcurrido en microsegundos
-    cout << "Tiempo transcurrido: " << elapsed_time.count() << " µs" << endl;
+        // Calcular el tiempo transcurrido en microsegundos
+        chrono::duration<double, micro> elapsed_time = end - start;
+
+        // Sumar el tiempo de esta prueba
+        total_time += elapsed_time.count();
+
+        // Imprimir el resultado y el tiempo transcurrido
+        cout << "Prueba " << (test + 1) << " - Tiempo transcurrido: " << elapsed_time.count() << " µs" << endl;
+
+        cout << "Resultado:\n";
+        printMatrix(result);
+        cout << "\n";
+
+        // Liberar la memoria de la matriz resultado
+        freeMatrix(result);
+    }
+
+    // Calcular el promedio del tiempo
+    double average_time = total_time / 10.0;
+    cout << "Tiempo promedio: " << average_time << " µs" << endl;
 
     return 0;
 }

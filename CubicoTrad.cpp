@@ -115,6 +115,11 @@ int main() {
 
     ifstream file("DatasetMatrices/matrices_" + to_string(SIZE) + ".txt");
 
+    if (!file) {
+        cerr << "No se pudo abrir el archivo." << endl;
+        return 1;
+    }
+
     // Leer la primera matriz
     readMatrix(file, mat1);
 
@@ -125,23 +130,40 @@ int main() {
     // Leer la segunda matriz
     readMatrix(file, mat2);
 
-    // Inicia el temporizador
-    auto start = chrono::high_resolution_clock::now();
+    file.close();
 
-    int** result = mulMat(mat1, mat2);
+    double total_time = 0.0;
 
-    // Detiene el temporizador
-    auto end = chrono::high_resolution_clock::now();
+    for (int test = 0; test < 10; ++test) {
+        // Inicia el temporizador
+        auto start = chrono::high_resolution_clock::now();
 
-    // Calcular el tiempo transcurrido en microsegundos
-    chrono::duration<double, micro> elapsed_time = end - start;
+        // Realizar la multiplicación de matrices
+        int** result = mulMat(mat1, mat2);
 
-    //Resultado
-    cout << "Resultado: \n";
-    printMatrix(result);
-    freeMatrix(result);
-    // Imprimir el tiempo transcurrido en microsegundos
-    cout << "Tiempo transcurrido: " << elapsed_time.count() << " µs" << endl;
+        // Detiene el temporizador
+        auto end = chrono::high_resolution_clock::now();
+
+        // Calcular el tiempo transcurrido en microsegundos
+        chrono::duration<double, micro> elapsed_time = end - start;
+
+        // Sumar el tiempo de esta prueba
+        total_time += elapsed_time.count();
+
+        // Imprimir el resultado y el tiempo transcurrido
+        cout << "Prueba " << (test + 1) << " - Tiempo transcurrido: " << elapsed_time.count() << " µs" << endl;
+
+        cout << "Resultado:\n";
+        printMatrix(result);
+        cout << "\n";
+
+        // Liberar la memoria de la matriz resultado
+        freeMatrix(result);
+    }
+
+    // Calcular el promedio del tiempo
+    double average_time = total_time / 10.0;
+    cout << "Tiempo promedio: " << average_time << " µs" << endl;
 
     return 0;
 }
