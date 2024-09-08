@@ -43,8 +43,6 @@ int** mulMat(int mat1[SIZE][SIZE], int mat2T[SIZE][SIZE]) {
         rslt[i] = new int[SIZE];
     }
 
-    cout << "Multiplication of given two matrices is:\n";
-
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             rslt[i][j] = 0;
