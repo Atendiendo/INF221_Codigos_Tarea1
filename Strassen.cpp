@@ -2,7 +2,7 @@
 #include <chrono>
 using namespace std;
 
-const int SIZE = 5; //Cambiar tamaño de las matrices
+const int SIZE = 2; //Cambiar tamaño de las matrices
 
 /*****
 * void addMatrix
@@ -314,33 +314,49 @@ int main() {
     // Leer la segunda matriz
     readMatrix(file, mat2);
 
-    // Inicia el temporizador
-    auto start = chrono::high_resolution_clock::now();
-    //Padding a las matrices a multiplicar
-    int **paddedMat1 = new int*[newSize];
-    int **paddedMat2 = new int*[newSize];
+    double total_time = 0.0;
 
-    for (int i = 0; i < newSize; i++) {
-        paddedMat1[i] = new int[newSize];
-        paddedMat2[i] = new int[newSize];
+    for (int test = 0; test < 10; ++test) {
+        // Inicia el temporizador
+        auto start = chrono::high_resolution_clock::now();
+        // Padding a las matrices a multiplicar
+        int **paddedMat1 = new int*[newSize];
+        int **paddedMat2 = new int*[newSize];
+
+        for (int i = 0; i < newSize; i++) {
+            paddedMat1[i] = new int[newSize];
+            paddedMat2[i] = new int[newSize];
+        }
+
+        padMatrix(mat1, SIZE, paddedMat1, newSize);
+        padMatrix(mat2, SIZE, paddedMat2, newSize);
+
+        strassen(paddedMat1, paddedMat2, rslt, newSize);
+
+        // Detiene el temporizador
+        auto end = chrono::high_resolution_clock::now();
+
+        // Calcular el tiempo transcurrido en microsegundos
+        chrono::duration<double, micro> elapsed_time = end - start;
+        total_time += elapsed_time.count();
+
+        // Liberar memoria de matrices con padding
+        for (int i = 0; i < newSize; i++) {
+            delete[] paddedMat1[i];
+            delete[] paddedMat2[i];
+        }
+        delete[] paddedMat1;
+        delete[] paddedMat2;
     }
 
-    padMatrix(mat1, SIZE, paddedMat1, newSize);
-    padMatrix(mat2, SIZE, paddedMat2, newSize);
-
-    strassen(paddedMat1, paddedMat2, rslt, newSize);
-
-    // Detiene el temporizador
-    auto end = chrono::high_resolution_clock::now();
-
-    // Calcular el tiempo transcurrido en microsegundos
-    chrono::duration<double, micro> elapsed_time = end - start;
+    // Calcular el tiempo promedio
+    double average_time = total_time / 10;
 
     cout << "Resultado: \n";
     printMatrix(rslt);
 
-    // Imprimir el tiempo transcurrido en microsegundos
-    cout << "Tiempo transcurrido: " << elapsed_time.count() << " µs" << endl;
+    // Imprimir el tiempo promedio transcurrido en microsegundos
+    cout << "Tiempo promedio: " << average_time << " µs" << endl;
 
     for (int i = 0; i < SIZE; i++) {
         delete[] mat1[i];
@@ -348,14 +364,10 @@ int main() {
     }
     for (int i = 0; i < newSize; i++) {
         delete[] rslt[i];
-        delete[] paddedMat1[i];
-        delete[] paddedMat2[i];
     }
     delete[] mat1;
     delete[] mat2;
     delete[] rslt;
-    delete[] paddedMat1;
-    delete[] paddedMat2;
 
     return 0;
 }

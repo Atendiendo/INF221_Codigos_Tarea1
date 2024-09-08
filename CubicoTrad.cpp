@@ -10,14 +10,14 @@ const int SIZE = 2; //Cambiar tamaño de las matrices
 * Se hace la multiplicacion entre 2 matrices, de la forma tradicional.
 ******
 * Input:
-*   int mat1[SIZE][SIZE]: Arreglo de arreglos con la primera matriz.
-*   int mat2[SIZE][SIZE]: Arreglo de arreglos con la segunda matriz.
+*   int** mat1: Arreglo de arreglos con la primera matriz.
+*   int** mat2: Arreglo de arreglos con la segunda matriz.
 ******
 * Returns:
 *   int**: Retorna una arreglo de arreglos que contiene el resultado
 *       de la multiplicación.
 *****/
-int** mulMat(int mat1[SIZE][SIZE], int mat2[SIZE][SIZE]) {
+int** mulMat(int** mat1, int** mat2) {
     int** rslt = new int*[SIZE];
     for (int i = 0; i < SIZE; i++) {
         rslt[i] = new int[SIZE];
@@ -65,7 +65,7 @@ void freeMatrix(int** matrix) {
 * Returns:
 *   No se retorna nada ya que la función es de tipo void.
 *****/
-void readMatrix(ifstream& file, int matrix[SIZE][SIZE]) {
+void readMatrix(ifstream& file, int** matrix) {
     for (int i = 0; i < SIZE; ++i) {
         string line;
         getline(file, line);
@@ -110,8 +110,12 @@ void printMatrix(int** matrix) {
 *   int: Retorna 0 si no hay problemas en la ejecucion.
 *****/
 int main() {
-    int mat1[SIZE][SIZE]; // Arreglo para la primera matriz
-    int mat2[SIZE][SIZE]; // Arreglo para la segunda matriz
+    int** mat1 = new int*[SIZE];
+    int** mat2 = new int*[SIZE];
+    for (int i = 0; i < SIZE; i++) {
+        mat1[i] = new int[SIZE];
+        mat2[i] = new int[SIZE];
+    }
 
     ifstream file("DatasetMatrices/matrices_" + to_string(SIZE) + ".txt");
 
@@ -164,6 +168,10 @@ int main() {
     // Calcular el promedio del tiempo
     double average_time = total_time / 10.0;
     cout << "Tiempo promedio: " << average_time << " µs" << endl;
+
+    // Liberar la memoria de las matrices
+    freeMatrix(mat1);
+    freeMatrix(mat2);
 
     return 0;
 }
